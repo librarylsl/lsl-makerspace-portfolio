@@ -1,1 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LSL MakerSpace | Year 1–Year 6</title>
 
+<style>
+    :root{
+        --green:#596b55;
+        --green-dark:#3f5040;
+        --teal:#8fb7b0;
+        --pink:#d6b3b3;
+        --beige:#eee7da;
+        --cream:#faf8f3;
+        --white:#ffffff;
+        --text:#28312b;
+        --muted:#667068;
+        --border:#d8ded8;
+        --shadow:0 8px 24px rgba(0,0,0,.08);
+    }
+
+    *{
+        box-sizing:border-box;
+        scroll-behavior:smooth;
+    }
+
+    body{
+        margin:0;
+        font-family:Arial, Helvetica, sans-serif;
+        color:var(--text);
+        background:var(--cream);
+        line-height:1.6;
+    }
+
+    nav{
+        position:sticky;
+        top:0;
+        z-index:1000;
+        background:rgba(255,255,255,.97);
+        border-bottom:1px solid var(--border);
+        padding:12px 20px;
+    }
+
+    .nav-wrap{
+        max-width:1200px;
+        margin:auto;
+        display:flex;
+        align-items:center;
+        gap:20px;
+        flex-wrap:wrap;
+    }
+
+    .brand{
+        font-weight:800;
+        color:var(--green-dark);
+        margin-right:auto;
+        font-size:18px;
+    }
+
+    nav a{
+        color:var(--green-dark);
+        text-decoration:none;
+        font-size:14px;
+        font-weight:700;
+    }
+
+    nav a:hover{
+        text-decoration:underline;
+    }
+
+    .hero{
+        padding:90px 20px;
+        background:
+            linear-gradient(rgba(63,80,64,.88),rgba(63,80,64,.88)),
+            url('YOUR-HERO-IMAGE-URL-HERE') center/cover;
+        color:white;
+        text-align:center;
+    }
+
+    .hero h1{
+        margin:0;
+        font-size:clamp(42px,7vw,82px);
+        line-height:1;
+        letter-spacing:-2px;
+    }
+
+    .hero p{
+        margin:22px auto 30px;
+        max-width:760px;
+        font-size:20px;
+    }
+
+    .btn{
+        display:inline-block;
+        padding:12px 20px;
+        margin:5px;
+        background:var(--white);
+        color:var(--green-dark);
+        border-radius:8px;
+        font-weight:800;
+        text-decoration:none;
+    }
+
+    .btn.secondary{
+        background:transparent;
+        border:2px solid white;
+        color:white;
+    }
+
+    section{
+        padding:70px 20px;
+    }
+
+    .container{
+        max-width:1180px;
+        margin:auto;
+    }
+
+    .section-label{
+        font-size:13px;
+        text-transform:uppercase;
+        letter-spacing:2px;
+        color:var(--green);
+        font-weight:800;
+    }
+
+    h2{
+        margin:5px 0 15px;
+        font-size:clamp(30px,4vw,48px);
+        line-height:1.1;
+        color:var(--green-dark);
+    }
+
+    h3{
+        color:var(--green-dark);
+        margin-top:0;
+    }
+
+    .intro{
+        max-width:800px;
+        color:var(--muted);
+        font-size:18px;
+        margin-bottom:35px;
+    }
+
+    .grid{
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+        gap:20px;
+    }
+
+    .card{
+        background:white;
+        border:1px solid var(--border);
+        border-radius:14px;
+        padding:24px;
+        box-shadow:var(--shadow);
+    }
+
+    .card strong{
+        color:var(--green-dark);
+    }
+
+    .stage{
+        font-size:13px;
+        font-weight:800;
+        text-transform:uppercase;
+        letter-spacing:1px;
+        color:var(--green);
+    }
+
+    .year-number{
+        font-size:40px;
+        font-weight:900;
+        color:var(--green-dark);
+        line-height:1;
+        margin-bottom:12px;
+    }
+
+    .process{
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:center;
+        align-items:center;
+        gap:8px;
+        margin:35px 0;
+    }
+
+    .step{
+        padding:12px 15px;
+        border-radius:999px;
+        background:var(--beige);
+        font-weight:800;
+        font-size:14px;
+    }
+
+    .arrow{
+        font-weight:900;
+        color:var(--green);
+    }
+
+    .year-section:nth-of-type(even){
+        background:#f3f0e8;
+    }
+
+    .badge{
+        display:inline-block;
+        padding:6px 10px;
+        margin:4px;
+        border-radius:999px;
+        background:var(--teal);
+        color:#173b35;
+        font-size:12px;
+        font-weight:800;
+    }
+
+    .badge.pink{
+        background:var(--pink);
+        color:#4d2929;
+    }
+
+    .lesson-grid{
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+        gap:14px;
+        margin-top:25px;
+    }
+
+    .lesson{
+        background:white;
+        border-left:5px solid var(--green);
+        padding:18px;
+        border-radius:10px;
+        box-shadow:0 4px 14px rgba(0,0,0,.05);
+    }
+
+    .lesson small{
+        display:block;
+        color:var(--muted);
+        margin-bottom:6px;
+    }
+
+    .portfolio{
+        margin-top:35px;
+        padding:28px;
+        background:white;
+        border-radius:14px;
+        border:1px solid var(--border);
+    }
+
+    .portfolio-item{
+        padding:14px 0;
+        border-bottom:1px solid var(--border);
+    }
+
+    .portfolio-item:last-child{
+        border-bottom:none;
+    }
+
+    .project-box{
+        background:var(--green-dark);
+        color:white;
+        border-radius:16px;
+        padding:30px;
+        margin-top:25px;
+    }
+
+    .project-box h3{
+        color:white;
+        font-size:28px;
+    }
+
+    table{
+        width:100%;
+        border-collapse:collapse;
+        background:white;
+        margin-top:24px;
+        overflow:hidden;
+        border-radius:12px;
+    }
+
+    th,td{
+        text-align:left;
+        padding:14px;
+        border-bottom:1px solid var(--border);
+        vertical-align:top;
+    }
+
+    th{
+        background:var(--green);
+        color:white;
+    }
+
+    .gallery{
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+        gap:18px;
+    }
+
+    .gallery-item{
+        min-height:190px;
+        background:var(--beige);
+        border-radius:14px;
+        display:flex;
+        align-items:end;
+        padding:20px;
+        font-weight:800;
+        position:relative;
+        overflow:hidden;
+    }
+
+    .placeholder{
+        background:
+        repeating-linear-gradient(
+            45deg,
+            #eee7da,
+            #eee7da 10px,
+            #e5ddce 10px,
+            #e5ddce 20px
+        );
+    }
+
+    .reflection{
+        display:grid;
+        grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+        gap:18px;
+    }
+
+    .reflection div{
+        padding:20px;
+        background:white;
+        border-radius:12px;
+        border:1px solid var(--border);
+    }
+
+    footer{
+        background:var(--green-dark);
+        color:white;
+        padding:50px 20px;
+        text-align:center;
+    }
+
+    footer h2{
+        color:white;
+    }
+
+    @media(max-width:700px){
+        nav{
+            position:relative;
+        }
+
+        .nav-wrap{
+            display:block;
+        }
+
+        nav a{
+            display:inline-block;
+            margin:6px 8px 6px 0;
+        }
+
+        .brand{
+            display:block;
+            margin-bottom:10px;
+        }
+
+        section{
+            padding:50px 16px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<nav>
+    <div class="nav-wrap">
+        <div class="brand">LSL MAKERSPACE</div>
+        <a href="#home">Home</a>
+        <a href="#journey">Journey</a>
+        <a href="#year1">Year 1</a>
+        <a href="#year2">Year 2</a>
+        <a href="#year3">Year 3</a>
+        <a href="#year4">Year 4</a>
+        <a href="#year5">Year 5</a>
+        <a href="#year6">Year 6</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#sdg">SDGs</a>
+    </div>
+</nav>
+
+
+<!-- HOME -->
+
+<header class="hero" id="home">
+    <h1>LSL MAKERSPACE</h1>
+    <p>
+        A six-year learning journey where students discover, create, code,
+        design, engineer and innovate.
+    </p>
+
+    <a class="btn" href="#journey">Explore Our Journey</a>
+    <a class="btn secondary" href="#gallery">Maker Gallery</a>
+</header>
+
+
+<section>
+    <div class="container">
+        <span class="section-label">Our Approach</span>
+        <h2>Learn Through Making</h2>
+
+        <p class="intro">
+            MakerSpace provides opportunities for students to explore ideas,
+            solve problems, use technology, build prototypes and reflect on
+            their learning.
+        </p>
+
+        <div class="grid">
+            <div class="card">
+                <h3>Explore</h3>
+                <p>Ask questions, investigate and discover how things work.</p>
+            </div>
+
+            <div class="card">
+                <h3>Create</h3>
+                <p>Transform ideas into designs, prototypes and digital creations.</p>
+            </div>
+
+            <div class="card">
+                <h3>Test</h3>
+                <p>Test ideas, identify problems and learn from mistakes.</p>
+            </div>
+
+            <div class="card">
+                <h3>Improve</h3>
+                <p>Debug, redesign and make solutions more effective.</p>
+            </div>
+        </div>
+
+        <div class="process">
+            <span class="step">EXPLORE</span>
+            <span class="arrow">→</span>
+            <span class="step">THINK</span>
+            <span class="arrow">→</span>
+            <span class="step">DESIGN</span>
+            <span class="arrow">→</span>
+            <span class="step">MAKE</span>
+            <span class="arrow">→</span>
+            <span class="step">TEST</span>
+            <span class="arrow">→</span>
+            <span class="step">DEBUG</span>
+            <span class="arrow">→</span>
+            <span class="step">IMPROVE</span>
+            <span class="arrow">→</span>
+            <span class="step">SHARE</span>
+        </div>
+    </div>
+</section>
+
+
+<!-- JOURNEY -->
+
+<section id="journey" style="background:#eee7da;">
+    <div class="container">
+        <span class="section-label">Progression</span>
+        <h2>Our Six-Year Maker Journey</h2>
+
+        <div class="grid">
+
+            <div class="card">
+                <div class="year-number">01</div>
+                <div class="stage">Discover</div>
+                <h3>Year 1</h3>
+                <p>I can explore and follow instructions.</p>
+            </div>
+
+            <div class="card">
+                <div class="year-number">02</div>
+                <div class="stage">Create</div>
+                <h3>Year 2</h3>
+                <p>I can design and create a simple solution.</p>
+            </div>
+
+            <div class="card">
+                <div class="year-number">03</div>
+                <div class="stage">Code</div>
+                <h3>Year 3</h3>
+                <p>I can use code to make things happen.</p>
+            </div>
+
+            <div class="card">
+                <div class="year-number">04</div>
+                <div class="stage">Design</div>
+                <h3>Year 4</h3>
+                <p>I can combine design, coding and technology.</p>
+            </div>
+
+            <div class="card">
+                <div class="year-number">05</div>
+                <div class="stage">Engineer</div>
+                <h3>Year 5</h3>
+                <p>I can build and test a functional system.</p>
+            </div>
+
+            <div class="card">
+                <div class="year-number">06</div>
+                <div class="stage">Innovate</div>
+                <h3>Year 6</h3>
+                <p>I can independently develop a real-world solution.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- YEAR 1 -->
+
+<section class="year-section" id="year1">
+<div class="container">
+
+<span class="section-label">Year 1</span>
+<h2>DISCOVER</h2>
+
+<p class="intro">
+    I explore. I follow. I make. I test.
+</p>
+
+<span class="badge">Algorithms</span>
+<span class="badge">Sequencing</span>
+<span class="badge">Patterns</span>
+<span class="badge">Debugging</span>
+<span class="badge">Digital Skills</span>
+
+<div class="process">
+    <span class="step">EXPLORE</span>
+    <span class="arrow">→</span>
+    <span class="step">FOLLOW</span>
+    <span class="arrow">→</span>
+    <span class="step">MAKE</span>
+    <span class="arrow">→</span>
+    <span class="step">TEST</span>
+    <span class="arrow">→</span>
+    <span class="step">IMPROVE</span>
+</div>
+
+<h3>Term / Lesson Overview</h3>
+
+<div class="lesson-grid">
+
+<div class="lesson">
+<small>Week 1</small>
+<strong>Welcome to MakerSpace</strong>
+<p>What is a maker?</p>
+</div>
+
+<div class="lesson">
+<small>Week 2</small>
+<strong>Keyboard Challenge</strong>
+<p>Develop basic digital skills.</p>
+</div>
+
+<div class="lesson">
+<small>Week 3</small>
+<strong>Algorithms</strong>
+<p>Give instructions in the correct order.</p>
+</div>
+
+<div class="lesson">
+<small>Week 4</small>
+<strong>Debugging</strong>
+<p>Find and fix mistakes.</p>
+</div>
+
+<div class="lesson">
+<small>Week 5</small>
+<strong>Bee-Bot Review</strong>
+<p>Explore movement and sequencing.</p>
+</div>
+
+<div class="lesson">
+<small>Week 6</small>
+<strong>Bee-Bot Challenge</strong>
+<p>Solve a navigation challenge.</p>
+</div>
+
+<div class="lesson">
+<small>Week 7</small>
+<strong>Snake & Ladder Algorithm</strong>
+<p>Create and follow sequences.</p>
+</div>
+
+<div class="lesson">
+<small>Week 8</small>
+<strong>Maker Challenge</strong>
+<p>Apply computational thinking.</p>
+</div>
+
+</div>
+
+<div class="portfolio">
+<h3>My Year 1 Portfolio</h3>
+
+<div class="portfolio-item"><strong>My Challenge:</strong> What am I trying to do?</div>
+<div class="portfolio-item"><strong>My Algorithm:</strong> Show my instructions.</div>
+<div class="portfolio-item"><strong>My Design:</strong> Add my drawing.</div>
+<div class="portfolio-item"><strong>My Creation:</strong> Add a photograph.</div>
+<div class="portfolio-item"><strong>My Testing:</strong> Did it work?</div>
+<div class="portfolio-item"><strong>My Reflection:</strong> What did I learn?</div>
+</div>
+
+</div>
+</section>
+
+
+<!-- YEAR 2 -->
+
+<section class="year-section" id="year2">
+<div class="container">
+
+<span class="section-label">Year 2</span>
+<h2>CREATE</h2>
+
+<p class="intro">
+    I think. I design. I create. I improve.
+</p>
+
+<span class="badge">Problem Solving</span>
+<span class="badge">Logical Thinking</span>
+<span class="badge">Design</span>
+<span class="badge">Testing</span>
+
+<div class="process">
+<span class="step">EXPLORE</span>
+<span class="arrow">→</span>
+<span class="step">THINK</span>
+<span class="arrow">→</span>
+<span class="step">DESIGN</span>
+<span class="arrow">→</span>
+<span class="step">MAKE</span>
+<span class="arrow">→</span>
+<span class="step">TEST</span>
+<span class="arrow">→</span>
+<span class="step">IMPROVE</span>
+</div>
+
+<div class="portfolio">
+<h3>Year 2 Project Portfolio</h3>
+
+<div class="portfolio-item"><strong>The Problem:</strong> What problem are we solving?</div>
+<div class="portfolio-item"><strong>My Idea:</strong> Explain the solution.</div>
+<div class="portfolio-item"><strong>My Design:</strong> Insert sketch or digital design.</div>
+<div class="portfolio-item"><strong>My Creation:</strong> Insert photograph.</div>
+<div class="portfolio-item"><strong>Testing:</strong> What happened?</div>
+<div class="portfolio-item"><strong>Improvement:</strong> What did I change?</div>
+<div class="portfolio-item"><strong>Reflection:</strong> What did I learn?</div>
+</div>
+
+</div>
+</section>
+
+
+<!-- YEAR 3 -->
+
+<section class="year-section" id="year3">
+<div class="container">
+
+<span class="section-label">Year 3</span>
+<h2>CODE</h2>
+
+<p class="intro">
+    I think. I code. I test. I debug.
+</p>
+
+<span class="badge">Scratch</span>
+<span class="badge">Algorithms</span>
+<span class="badge">Flowcharts</span>
+<span class="badge">micro:bit</span>
+<span class="badge">Debugging</span>
+
+<div class="grid" style="margin-top:30px;">
+
+<div class="card">
+<h3>Term 1</h3>
+<strong>Computational Thinking</strong>
+<p>Algorithms, sequencing, flowcharts and debugging.</p>
+</div>
+
+<div class="card">
+<h3>Term 2</h3>
+<strong>Scratch</strong>
+<p>Sprites, events, sequences, loops and conditionals.</p>
+</div>
+
+<div class="card">
+<h3>Term 3</h3>
+<strong>micro:bit</strong>
+<p>Buttons, LEDs, inputs, outputs and simple physical computing.</p>
+</div>
+
+</div>
+
+<div class="portfolio">
+<h3>My Coding Portfolio</h3>
+
+<div class="portfolio-item"><strong>My Algorithm:</strong> Insert flowchart.</div>
+<div class="portfolio-item"><strong>My Code:</strong> Insert Scratch or micro:bit screenshot.</div>
+<div class="portfolio-item"><strong>My Test:</strong> Insert photo or video.</div>
+<div class="portfolio-item"><strong>My Debugging:</strong> What went wrong?</div>
+<div class="portfolio-item"><strong>My Fix:</strong> How did I fix it?</div>
+<div class="portfolio-item"><strong>My Reflection:</strong> What did I learn?</div>
+</div>
+
+</div>
+</section>
+
+
+<!-- YEAR 4 -->
+
+<section class="year-section" id="year4">
+<div class="container">
+
+<span class="section-label">Year 4</span>
+<h2>DESIGN</h2>
+
+<p class="intro">
+    I design. I code. I build. I improve.
+</p>
+
+<span class="badge">Scratch</span>
+<span class="badge">micro:bit</span>
+<span class="badge">Sensors</span>
+<span class="badge">Tinkercad</span>
+<span class="badge">3D Printing</span>
+
+<div class="process">
+<span class="step">IDENTIFY</span>
+<span class="arrow">→</span>
+<span class="step">DESIGN</span>
+<span class="arrow">→</span>
+<span class="step">CODE</span>
+<span class="arrow">→</span>
+<span class="step">BUILD</span>
+<span class="arrow">→</span>
+<span class="step">TEST</span>
+<span class="arrow">→</span>
+<span class="step">IMPROVE</span>
+</div>
+
+<div class="project-box">
+<h3>Featured Project</h3>
+
+<p><strong>Project Name:</strong> [Insert project name]</p>
+
+<p><strong>Problem:</strong><br>
+[Describe the problem.]</p>
+
+<p><strong>Design:</strong><br>
+[Insert sketch or Tinkercad design.]</p>
+
+<p><strong>Code:</strong><br>
+[Insert screenshot.]</p>
+
+<p><strong>Prototype:</strong><br>
+[Insert photograph.]</p>
+
+<p><strong>Testing:</strong><br>
+[Insert results or video.]</p>
+
+<p><strong>Improvement:</strong><br>
+[Describe before and after.]</p>
+</div>
+
+</div>
+</section>
+
+
+<!-- YEAR 5 -->
+
+<section class="year-section" id="year5">
+<div class="container">
+
+<span class="section-label">Year 5</span>
+<h2>ENGINEER</h2>
+
+<p class="intro">
+    I design. I build. I program. I test.
+</p>
+
+<span class="badge">Arduino</span>
+<span class="badge">Electronics</span>
+<span class="badge">Sensors</span>
+<span class="badge">Circuits</span>
+<span class="badge">3D Modelling</span>
+
+<div class="process">
+<span class="step">IDENTIFY</span>
+<span class="arrow">→</span>
+<span class="step">RESEARCH</span>
+<span class="arrow">→</span>
+<span class="step">DESIGN</span>
+<span class="arrow">→</span>
+<span class="step">BUILD</span>
+<span class="arrow">→</span>
+<span class="step">PROGRAM</span>
+<span class="arrow">→</span>
+<span class="step">TEST</span>
+<span class="arrow">→</span>
+<span class="step">ITERATE</span>
+</div>
+
+<div class="portfolio">
+<h3>Engineering Challenge</h3>
+
+<div class="portfolio-item"><strong>01 — Problem</strong><br>What problem are we solving?</div>
+<div class="portfolio-item"><strong>02 — Research</strong><br>What do we need to know?</div>
+<div class="portfolio-item"><strong>03 — Requirements</strong><br>What must our solution do?</div>
+<div class="portfolio-item"><strong>04 — Design</strong><br>Sketch, circuit diagram, flowchart and model.</div>
+<div class="portfolio-item"><strong>05 — Build</strong><br>Document the construction process.</div>
+<div class="portfolio-item"><strong>06 — Program</strong><br>Insert code.</div>
+<div class="portfolio-item"><strong>07 — Test</strong><br>Record test results.</div>
+<div class="portfolio-item"><strong>08 — Iterate</strong><br>What changed and why?</div>
+<div class="portfolio-item"><strong>09 — Final Prototype</strong><br>Insert photograph or video.</div>
+<div class="portfolio-item"><strong>10 — Reflection</strong><br>What did I learn about engineering?</div>
+</div>
+
+<table>
+<tr>
+<th>Test</th>
+<th>Result</th>
+<th>Problem</th>
+<th>Improvement</th>
+</tr>
+
+<tr>
+<td>Test 1</td>
+<td>[Result]</td>
+<td>[Problem]</td>
+<td>[Change]</td>
+</tr>
+
+<tr>
+<td>Test 2</td>
+<td>[Result]</td>
+<td>[Problem]</td>
+<td>[Change]</td>
+</tr>
+
+<tr>
+<td>Test 3</td>
+<td>[Result]</td>
+<td>[Problem]</td>
+<td>[Change]</td>
+</tr>
+</table>
+
+</div>
+</section>
+
+
+<!-- YEAR 6 -->
+
+<section class="year-section" id="year6">
+<div class="container">
+
+<span class="section-label">Year 6</span>
+<h2>INNOVATE</h2>
+
+<p class="intro">
+    I identify. I engineer. I innovate.
+</p>
+
+<span class="badge">Engineering</span>
+<span class="badge">Physical Computing</span>
+<span class="badge">AI</span>
+<span class="badge">Research</span>
+<span class="badge">Prototyping</span>
+
+<div class="process">
+<span class="step">IDENTIFY</span>
+<span class="arrow">→</span>
+<span class="step">RESEARCH</span>
+<span class="arrow">→</span>
+<span class="step">IDEATE</span>
+<span class="arrow">→</span>
+<span class="step">DESIGN</span>
+<span class="arrow">→</span>
+<span class="step">ENGINEER</span>
+<span class="arrow">→</span>
+<span class="step">PROGRAM</span>
+<span class="arrow">→</span>
+<span class="step">PROTOTYPE</span>
+<span class="arrow">→</span>
+<span class="step">TEST</span>
+<span class="arrow">→</span>
+<span class="step">ITERATE</span>
+<span class="arrow">→</span>
+<span class="step">PRESENT</span>
+</div>
+
+<div class="portfolio">
+
+<h3>Year 6 Innovation Project</h3>
+
+<div class="portfolio-item">
+<strong>Project Name</strong><br>
+[Insert project title]
+</div>
+
+<div class="portfolio-item">
+<strong>The Problem</strong><br>
+What real-world problem are you solving?
+</div>
+
+<div class="portfolio-item">
+<strong>Why Does It Matter?</strong><br>
+Who is affected by this problem?
+</div>
+
+<div class="portfolio-item">
+<strong>Research</strong><br>
+What did you discover?
+</div>
+
+<div class="portfolio-item">
+<strong>Design Brief</strong><br>
+What must the solution achieve?
+</div>
+
+<div class="portfolio-item">
+<strong>Brainstorm</strong><br>
+Insert mind map or ideation evidence.
+</div>
+
+<div class="portfolio-item">
+<strong>Proposed Solution</strong><br>
+Explain your solution.
+</div>
+
+<div class="portfolio-item">
+<strong>System Design</strong><br>
+Add system diagram, circuit diagram, algorithm and flowchart.
+</div>
+
+<div class="portfolio-item">
+<strong>Prototype 1</strong><br>
+What worked? What failed?
+</div>
+
+<div class="portfolio-item">
+<strong>Prototype 2</strong><br>
+What changed?
+</div>
+
+<div class="portfolio-item">
+<strong>Testing</strong><br>
+Insert results, data, images or video.
+</div>
+
+<div class="portfolio-item">
+<strong>Iteration</strong><br>
+Problem → Change → Result
+</div>
+
+<div class="portfolio-item">
+<strong>Final Solution</strong><br>
+Insert photograph and video demonstration.
+</div>
+
+<div class="portfolio-item">
+<strong>Presentation</strong><br>
+Insert presentation, pitch or demonstration.
+</div>
+
+<div class="portfolio-item">
+<strong>Evaluation</strong><br>
+Does the solution solve the original problem?
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- GALLERY -->
+
+<section id="gallery">
+<div class="container">
+
+<span class="section-label">Showcase</span>
+<h2>Maker Gallery</h2>
+
+<p class="intro">
+Explore creations, prototypes, code and projects developed by our young makers.
+</p>
+
+<div class="gallery">
+
+<div class="gallery-item placeholder">Year 1 — Discover</div>
+<div class="gallery-item placeholder">Year 2 — Create</div>
+<div class="gallery-item placeholder">Year 3 — Code</div>
+<div class="gallery-item placeholder">Year 4 — Design</div>
+<div class="gallery-item placeholder">Year 5 — Engineer</div>
+<div class="gallery-item placeholder">Year 6 — Innovate</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- SDG -->
+
+<section id="sdg" style="background:#eee7da;">
+<div class="container">
+
+<span class="section-label">Sustainability</span>
+<h2>Making for a Better World</h2>
+
+<p class="intro">
+Our MakerSpace projects connect creativity, technology and problem-solving
+with the United Nations Sustainable Development Goals.
+</p>
+
+<div class="grid">
+
+<div class="card">
+<h3>SDG 3</h3>
+<strong>Good Health and Well-Being</strong>
+<p>Design solutions that support healthier lives and environments.</p>
+</div>
+
+<div class="card">
+<h3>SDG 4</h3>
+<strong>Quality Education</strong>
+<p>Develop creativity, digital literacy and lifelong learning skills.</p>
+</div>
+
+<div class="card">
+<h3>SDG 11</h3>
+<strong>Sustainable Cities and Communities</strong>
+<p>Use technology and design to improve communities.</p>
+</div>
+
+<div class="card">
+<h3>SDG 12</h3>
+<strong>Responsible Consumption and Production</strong>
+<p>Consider materials, waste, reuse and responsible making.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- MATURITY MODEL -->
+
+<section>
+<div class="container">
+
+<span class="section-label">Portfolio Progression</span>
+<h2>MakerSpace Digital Portfolio Maturity Model</h2>
+
+<table>
+
+<tr>
+<th>Year</th>
+<th>Maker Stage</th>
+<th>Student Statement</th>
+<th>Typical Evidence</th>
+</tr>
+
+<tr>
+<td>Year 1</td>
+<td>Discover</td>
+<td>I can explore and follow instructions.</td>
+<td>Algorithms, drawings, photographs, simple reflection.</td>
+</tr>
+
+<tr>
+<td>Year 2</td>
+<td>Create</td>
+<td>I can design and create a solution.</td>
+<td>Problem, design, creation, testing and improvement.</td>
+</tr>
+
+<tr>
+<td>Year 3</td>
+<td>Code</td>
+<td>I can use code to make things happen.</td>
+<td>Flowcharts, Scratch, micro:bit code and debugging evidence.</td>
+</tr>
+
+<tr>
+<td>Year 4</td>
+<td>Design</td>
+<td>I can combine design, coding and technology.</td>
+<td>Tinkercad, micro:bit, sensors, prototypes and iteration.</td>
+</tr>
+
+<tr>
+<td>Year 5</td>
+<td>Engineer</td>
+<td>I can build and test a functional system.</td>
+<td>Engineering design, Arduino, circuits, testing data and prototypes.</td>
+</tr>
+
+<tr>
+<td>Year 6</td>
+<td>Innovate</td>
+<td>I can develop a solution to a real-world problem.</td>
+<td>Research, engineering, physical computing, AI, testing and presentation.</td>
+</tr>
+
+</table>
+
+</div>
+</section>
+
+
+<!-- REFLECTION -->
+
+<section style="background:#f3f0e8;">
+<div class="container">
+
+<span class="section-label">Student Reflection</span>
+<h2>My Maker Reflection</h2>
+
+<div class="reflection">
+
+<div>
+<h3>I learned...</h3>
+<p>[Student response]</p>
+</div>
+
+<div>
+<h3>I discovered...</h3>
+<p>[Student response]</p>
+</div>
+
+<div>
+<h3>I found difficult...</h3>
+<p>[Student response]</p>
+</div>
+
+<div>
+<h3>I solved it by...</h3>
+<p>[Student response]</p>
+</div>
+
+<div>
+<h3>I am proud of...</h3>
+<p>[Student response]</p>
+</div>
+
+<div>
+<h3>Next time I will...</h3>
+<p>[Student response]</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- TEACHER FEEDBACK -->
+
+<section>
+<div class="container">
+
+<span class="section-label">Assessment</span>
+<h2>Teacher / Librarian Feedback</h2>
+
+<div class="card">
+
+<p><strong>Student:</strong> [Student Name]</p>
+<p><strong>Year:</strong> [Year Group]</p>
+<p><strong>Project:</strong> [Project Name]</p>
+
+<h3>Skills Demonstrated</h3>
+
+<p>
+☐ Creativity<br>
+☐ Computational Thinking<br>
+☐ Problem Solving<br>
+☐ Collaboration<br>
+☐ Digital Literacy<br>
+☐ Coding<br>
+☐ Design Thinking<br>
+☐ Engineering<br>
+☐ Communication<br>
+☐ Reflection
+</p>
+
+<h3>Feedback</h3>
+<p>[Teacher / Librarian feedback]</p>
+
+<h3>Next Learning Goal</h3>
+<p>[Recommended next step]</p>
+
+</div>
+
+</div>
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<h2>WE DON'T JUST MAKE THINGS.</h2>
+
+<p>
+We make ideas visible.<br>
+We make mistakes useful.<br>
+We make solutions better.<br>
+We make learning happen.
+</p>
+
+<p>
+<strong>LEARN • MAKE • TEST • IMPROVE • SHARE</strong>
+</p>
+
+<p>LSL MakerSpace | LEAD International School</p>
+
+</footer>
+
+</body>
+</html>
